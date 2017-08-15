@@ -26,27 +26,92 @@ var planets = [{
 
 var planetHolderDiv = document.getElementById("planetHolder");
 var planetsButton = document.getElementById("showButton");
-planetsButton.addEventListener("mouseenter", function () {
-  domString();
-})
+var inputField = document.getElementById("searchText");
+var clearButton = document.getElementById("clearButton");
 
-function domString () {
+
+function domString(planetz) {
   var planetString = '';
-  for (var i = 0; i < planets.length; i ++) {
+  for (var i = 0; i < planetz.length; i ++) {
     var currentPlanet = '';
     currentPlanet += `<div class="planetContainer" id="planetContainer-${i}">`;
-    currentPlanet += `<div class="planetName">${planets[i].name}</div>`;
-    currentPlanet += `<img class="planetImage" src="${planets[i].url}">`;
+    currentPlanet += `<div class="planetName hidden">${planetz[i].name}</div>`;
+    currentPlanet += `<img class="planetImage" src="${planetz[i].url}">`;
     currentPlanet += `</div>`
     planetString += currentPlanet;
   }
   writeToDom(planetString); 
 }
 
-function writeToDom (strang) {
-  planetHolderDiv.innerHTML = strang
+function writeToDom(strang) {
+  planetHolderDiv.innerHTML = strang;
 }
 
+function showMe(e) {
+   e.target.previousSibling.classList.remove('hidden');
+}
 
+planetsButton.addEventListener("mouseenter", function() {
+  domString(planets);
+});
+
+document.body.addEventListener('click', function(event) {
+  // console.log("click event", event.target.);
+  if (event.target.className === 'planetImage') {
+    showMe(event);
+  } 
+})
+
+inputField.addEventListener('keypress', function(event) {
+  // console.log("event", event.keyCode);
+  if (event.key === 'Enter') {
+    var txt = inputField.value;
+    //1. filter planets array
+    var results = planets.filter(function(thing){
+      // console.log('filter thing', thing);
+      return thing.name.indexOf(txt)>-1;
+    })
+    domString(results);
+    // domString(results);
+    // console.log(results);
+    // console.log('you hit enter bitch', txt);
+  }
+})
+
+clearButton.addEventListener('click', function(event) {
+  var clearThis = document.getElementById('searchText').value = ''; 
+})
 
 // domString();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

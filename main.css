@@ -53,3 +53,7 @@ body {
 	width: 300px;
 }
 
+.hidden {
+	display: none;
+}
+
