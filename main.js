@@ -25,7 +25,10 @@ var planets = [{
 }];
 
 var planetHolderDiv = document.getElementById("planetHolder");
-
+var planetsButton = document.getElementById("showButton");
+planetsButton.addEventListener("mouseenter", function () {
+  domString();
+})
 
 function domString () {
   var planetString = '';
@@ -44,4 +47,6 @@ function writeToDom (strang) {
   planetHolderDiv.innerHTML = strang
 }
 
-domString();
+
+
+// domString();
